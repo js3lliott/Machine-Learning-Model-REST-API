@@ -1,2 +1,0 @@
-username: jordansamek
-password: emjo3656

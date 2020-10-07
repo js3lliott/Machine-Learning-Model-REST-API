@@ -122,4 +122,21 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_CLASSES': [
+        'Prediction.throttles.LimitedRateThrottle',
+        'Prediction.throttles.BurstRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'limited': '2/min',
+        'burst': '10/min'
+    },
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+
+
 # https://datagraphi.com/blog/post/2019/12/19/rest-api-guide-productionizing-a-machine-learning-model-by-creating-a-rest-api-with-python-django-and-django-rest-framework

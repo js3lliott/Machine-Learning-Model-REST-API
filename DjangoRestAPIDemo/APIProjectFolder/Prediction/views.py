@@ -6,6 +6,9 @@ from rest_framework.views import APIView
 from .apps import PredictionConfig
 import pandas as pd
 
+from rest_framework.permissions import IsAuthenticated
+from .throttles import LimitedRateThrottle, BurstRateThrottle
+
 # Create your views here.
 @api_view(['GET', 'POST'])
 def api_add(request):
@@ -24,6 +27,7 @@ def api_add(request):
 
 # Class based view to add numbers
 class Add_Values(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request, format=None):
         sum = 0
         # Add the numbers
@@ -35,7 +39,8 @@ class Add_Values(APIView):
 
 # Class based view to predict based on IRIS model
 class IRIS_Model_Predict(APIView):
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
+    throttle_classes = [LimitedRateThrottle]
     def post(self, request, format=None):
         data = request.data
         keys = []

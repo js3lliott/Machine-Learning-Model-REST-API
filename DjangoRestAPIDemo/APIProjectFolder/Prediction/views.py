@@ -34,7 +34,7 @@ class Add_Values(APIView):
         return Response(response_dict, status=status.HTTP_201_CREATED)
 
 # Class based view to predict based on IRIS model
-class IRIS_Model_predict(APIView):
+class IRIS_Model_Predict(APIView):
     #permission_classes = [IsAuthenticated]
     def post(self, request, format=None):
         data = request.data
